@@ -40,15 +40,17 @@ Partial Class Form1
         Me.Button5 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(106, 86)
+        Me.Button1.Location = New System.Drawing.Point(104, 86)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(41, 27)
         Me.Button1.TabIndex = 0
@@ -64,9 +66,8 @@ Partial Class Form1
         '
         Me.TextBox1.Location = New System.Drawing.Point(79, 9)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(138, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(184, 20)
         Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "SSID"
         '
         'Label1
         '
@@ -90,7 +91,7 @@ Partial Class Form1
         '
         Me.TextBox2.Location = New System.Drawing.Point(79, 40)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(138, 20)
+        Me.TextBox2.Size = New System.Drawing.Size(184, 20)
         Me.TextBox2.TabIndex = 4
         '
         'Timer2
@@ -109,40 +110,48 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(198, 86)
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(224, 86)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(27, 27)
+        Me.Button2.Size = New System.Drawing.Size(39, 27)
         Me.Button2.TabIndex = 6
         Me.Button2.Text = ">>"
+        Me.ToolTip1.SetToolTip(Me.Button2, "Settings for Host IP.")
         Me.Button2.UseVisualStyleBackColor = True
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(244, 9)
+        Me.TextBox3.Location = New System.Drawing.Point(284, 9)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(171, 20)
         Me.TextBox3.TabIndex = 7
         Me.TextBox3.Text = "Wireless Network Connection 2"
+        Me.ToolTip1.SetToolTip(Me.TextBox3, "Name of the Interface which connects using Microsoft Virtual WiFi Miniport Adapte" & _
+        "r" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Or Name of the Adapter whose IP you want to Change.")
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(244, 40)
+        Me.TextBox4.Location = New System.Drawing.Point(284, 40)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(109, 20)
         Me.TextBox4.TabIndex = 8
+        Me.ToolTip1.SetToolTip(Me.TextBox4, "IP address to be set to the above interface" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Preferably ending with """".1"""" If you" & _
+        " are hosting the network." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "And not ending with """".1"""" If you are not hosting the" & _
+        " network.")
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(244, 86)
+        Me.Button3.Location = New System.Drawing.Point(284, 86)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(95, 27)
         Me.Button3.TabIndex = 9
         Me.Button3.Text = "Change IP"
+        Me.ToolTip1.SetToolTip(Me.Button3, "If this does not work. Try running as Admin.")
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(363, 40)
+        Me.Button4.Location = New System.Drawing.Point(403, 40)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(52, 20)
         Me.Button4.TabIndex = 10
@@ -156,33 +165,42 @@ Partial Class Form1
         Me.Button5.Size = New System.Drawing.Size(51, 27)
         Me.Button5.TabIndex = 11
         Me.Button5.Text = "IP Chat"
+        Me.ToolTip1.SetToolTip(Me.Button5, "Start IP Chat")
         Me.Button5.UseVisualStyleBackColor = True
-        '
-        'ToolTip1
-        '
         '
         'Button8
         '
-        Me.Button8.Location = New System.Drawing.Point(153, 86)
+        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 4.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button8.Location = New System.Drawing.Point(151, 86)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(39, 26)
+        Me.Button8.Size = New System.Drawing.Size(39, 27)
         Me.Button8.TabIndex = 14
-        Me.Button8.Text = "↓↓"
+        Me.Button8.Text = "Minimize"
         Me.ToolTip1.SetToolTip(Me.Button8, "Minimize to Tray")
         Me.Button8.UseVisualStyleBackColor = True
         '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(196, 86)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(29, 27)
+        Me.Button9.TabIndex = 16
+        Me.Button9.Text = "▼"
+        Me.ToolTip1.SetToolTip(Me.Button9, "List of Connected Clients")
+        Me.Button9.UseVisualStyleBackColor = True
+        '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(65, 86)
+        Me.Button6.Location = New System.Drawing.Point(63, 86)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(35, 26)
+        Me.Button6.Size = New System.Drawing.Size(35, 27)
         Me.Button6.TabIndex = 12
         Me.Button6.Text = "Exit"
         Me.Button6.UseVisualStyleBackColor = True
         '
         'Button7
         '
-        Me.Button7.Location = New System.Drawing.Point(345, 86)
+        Me.Button7.Location = New System.Drawing.Point(385, 86)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(70, 26)
         Me.Button7.TabIndex = 13
@@ -192,23 +210,34 @@ Partial Class Form1
         'NotifyIcon1
         '
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
-        Me.NotifyIcon1.Text = "Clict to Show. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "DoubleClick to Start/Stop."
+        Me.NotifyIcon1.Text = "Click to Show Connected Clients. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "DoubleClick to Show window."
         Me.NotifyIcon1.Visible = True
         '
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(18, 133)
+        Me.ListBox1.Location = New System.Drawing.Point(8, 144)
+        Me.ListBox1.MultiColumn = True
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(198, 160)
+        Me.ListBox1.Size = New System.Drawing.Size(255, 173)
         Me.ListBox1.TabIndex = 15
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(5, 128)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(127, 13)
+        Me.Label4.TabIndex = 17
+        Me.Label4.Text = "List of Connected Clients:"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(227, 328)
-        Me.ControlBox = False
+        Me.ClientSize = New System.Drawing.Size(272, 120)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
@@ -230,7 +259,8 @@ Partial Class Form1
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.Text = "Virtual Router and IP Chat"
+        Me.Text = "Wifi Host n Chat"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -255,5 +285,7 @@ Partial Class Form1
     Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
     Friend WithEvents Button8 As System.Windows.Forms.Button
     Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
+    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 
 End Class
