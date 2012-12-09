@@ -3,19 +3,19 @@ Imports Microsoft.VisualBasic.Devices
 Public Class Form1
     Friend VirtualRouter
     Dim WithEvents vr As New VirtualRouter.Wlan.WlanManager
-    Dim ct As Integer
+    Dim listofcclients As String
+    Dim ct As Integer = 0
     Dim noconn As Integer
-    Dim arr() As String = {"0"}
+    'Dim arr() As String = {"0"}
     Dim vbdevaud As New Microsoft.VisualBasic.Devices.Audio
+
+    
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs)
-        vr.QueryConnectionSettings(TextBox1.Text, vbNull)
-        vr.QuerySecondaryKey(TextBox2.Text, vbNull, vbNull)
-        ct = 0
-        noconn = 0
+        
     End Sub
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
         If Button1.Text = "Start" Then
-
+            Debug.Print(My.Application.CommandLineArgs.Count)
             If TextBox2.TextLength < 8 Then
                 MsgBox("Password length should be >= 8")
                 TextBox2.Text = "password"
@@ -26,11 +26,13 @@ Public Class Form1
             Button1.Text = "Stop"
             vr.QuerySecondaryKey(TextBox2.Text, vbNull, vbNull)
             Timer2.Enabled = True
+            ToolTip1.SetToolTip(Button1, "Stop the HostedNetwork")
         Else
             Timer2.Enabled = True
             vr.StopHostedNetwork()
             vr.QuerySecondaryKey(TextBox2.Text, vbNull, vbNull)
             Button1.Text = "Start"
+            ToolTip1.SetToolTip(Button1, "Start the HostedNetwork")
         End If
     End Sub
     Dim tempkey As String
@@ -39,45 +41,98 @@ Public Class Form1
             If vr.Stations.Count > noconn Then
                 vbdevaud.Play(Application.StartupPath + "\connect.wav")
                 noconn = vr.Stations.Count
-                ' vr.Stations.Keys.CopyTo(arr, 0)
-                For Each keyy In vr.Stations.Keys
+                ListBox1.Items.Clear()
 
-                    Debug.Print(keyy.ToString)
-                    Debug.Print(noconn.ToString + ":::::" + vr.Stations.Count.ToString)
-                    If tempkey = keyy Then GoTo exitfor
-                    tempkey = keyy
+                ' vr.Stations.Keys.CopyTo(arr, 0)
+                listofcclients = ""
+                For Each keyy In vr.Stations.Keys
+                    ListBox1.Items.Add(keyy)
+                    listofcclients += keyy + vbCrLf
                 Next
-exitfor:
+                'exitfor:
+                NotifyIcon1.ShowBalloonTip(200, "New Client Connected", "Clients Currently Connected:" + vbCrLf + listofcclients, ToolTipIcon.Info)
             ElseIf vr.Stations.Count < noconn Then
                 vbdevaud.Play(Application.StartupPath + "\disconnect.wav")
                 noconn = vr.Stations.Count
+                ListBox1.Items.Clear()
+                listofcclients = ""
+                For Each keyy In vr.Stations.Keys
+                    ListBox1.Items.Add(keyy)
+                    listofcclients += keyy + vbCrLf
+                Next
+                NotifyIcon1.ShowBalloonTip(200, "Client Disconnected", "Clients Currently Connected:" + vbCrLf + listofcclients, ToolTipIcon.Info)
+
             End If
             Label3.Text = "No of Connected Clients:" + vr.Stations.Count.ToString
         Else
-            Label3.Text = "No of Connected Clients:" + 0
+            Label3.Text = "No of Connected Clients:0"
             noconn = 0
         End If
         If vr.IsHostedNetworkStarted = False Then
             Button1.Text = "Start"
             noconn = 0
+
+            ListBox1.Items.Clear()
+            vr.Stations.Clear()
         ElseIf vr.IsHostedNetworkStarted = True Then
             Button1.Text = "Stop"
+
         ElseIf vr.HostedNetworkState = Global.VirtualRouter.Wlan.WinAPI.WLAN_HOSTED_NETWORK_STATE.wlan_hosted_network_unavailable Then
             Button1.Text = "Stop"
+            ToolTip1.SetToolTip(Button1, "Stop the HostedNetwork")
         End If
     End Sub
    
     Private Sub Timer2_Tick(sender As System.Object, e As System.EventArgs) Handles Timer2.Tick
         ct += 1
-        vr.QuerySecondaryKey(TextBox2.Text, vbNull, vbNull)
+        Debug.Print(ct.ToString)
+
+        If ct < 8 Then
+            vr.QuerySecondaryKey(TextBox2.Text, vbNull, vbNull)
+        End If
+
+        If ct > 8 Then
+            TextBox1.Text = ""
+            TextBox2.Text = ""
+            listofcclients = ""
+            Debug.Print(My.Application.CommandLineArgs.Count)
+            If My.Application.CommandLineArgs.Count > 0 Then
+                For Each cmd In My.Application.CommandLineArgs
+                    Debug.Print(cmd)
+                    If cmd.StartsWith("ssid=") Then TextBox1.Text = cmd.Substring(5)
+                    If cmd.StartsWith("pass=") Then TextBox2.Text = cmd.Substring(5)
+                Next
+            End If
+            If TextBox1.Text = "" Then vr.QueryConnectionSettings(TextBox1.Text, vbNull)
+            If TextBox2.Text = "" Then vr.QuerySecondaryKey(TextBox2.Text, vbNull, vbNull)
+
+
+            
+            noconn = 0
+            Me.WindowState = FormWindowState.Normal
+        End If
         If ct > 10 Then
+
+            If My.Application.CommandLineArgs.Contains("autostart") Then
+                vr.StopHostedNetwork()
+                vr.ForceStop()
+                If TextBox2.Text.Length < 8 Then
+                    NotifyIcon1.ShowBalloonTip(1000, "Password Error", "Password smaller than 8 characters" + vbCrLf + "Password changed to ""qassword""", ToolTipIcon.Warning)
+                    TextBox2.Text = "qassword"
+                End If
+                Button1_Click(Me, EventArgs.Empty)
+                Me.Hide()
+            End If
+            If TextBox1.Text = "" Then TextBox1.Text = "SSID"
+            If TextBox2.Text = "" Then TextBox2.Text = "qassword"
             Timer2.Enabled = False
-            ct = 0
+            ct = 100
         End If
         TextBox4.Text = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName).AddressList(1).ToString()
     End Sub
 
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+        Dim i As Integer
         If Button2.Text = ">>" Then
             For i = 1 To 200
                 Me.Width += 1
@@ -89,7 +144,6 @@ exitfor:
             Next
             Button2.Text = ">>"
         End If
-
     End Sub
 
 
@@ -116,69 +170,51 @@ exitfor:
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
-    Private Sub Button2_MouseHover(sender As Object, e As System.EventArgs) Handles Button2.MouseHover
-        ToolTip1.SetToolTip(Button2, "Settings for Host IP.")
-    End Sub
-
-    Private Sub Button5_MouseHover(sender As Object, e As System.EventArgs) Handles Button5.MouseHover
-        ToolTip1.SetToolTip(Button5, "Start IP Chat")
-
-    End Sub
-
-    
-
-    Private Sub Button1_MouseHover(sender As Object, e As System.EventArgs) Handles Button1.MouseHover
-        ToolTip1.SetToolTip(Button1, "Start/Stop the HostedNetwork")
-
-    End Sub
-
     Private Sub Button6_Click(sender As System.Object, e As System.EventArgs) Handles Button6.Click
         DemoApp.Close()
         Me.Close()
+        Try
+            vr.StopHostedNetwork()
+        Catch eex As Exception
+        End Try
         End
-
     End Sub
 
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
         MsgBox("This Application is created by Sumant Vanage." + vbCrLf + "Special Thanks to Chris Pietschmann and Unoteam", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AbouT")
     End Sub
 
-    Private Sub TextBox3_MouseHover(sender As Object, e As System.EventArgs) Handles TextBox3.MouseHover
-        ToolTip1.SetToolTip(TextBox3, "Name of the Interface which connects using Microsoft Virtual WiFi Miniport Adapter." + vbCrLf + "Or Name of the Adapter whose IP you want to Change.")
-    End Sub
-
-    Private Sub TextBox4_MouseHover(sender As Object, e As System.EventArgs) Handles TextBox4.MouseHover
-        ToolTip1.SetToolTip(TextBox4, "IP address to be set to the above interface." + vbCrLf + "Preferably ending with "".1"" If you are hosting the network." + vbCrLf + "And not ending with "".1"" If you are not hosting the network.")
-
-    End Sub
-
-    Private Sub Button3_MouseHover(sender As Object, e As System.EventArgs) Handles Button3.MouseHover
-        ToolTip1.SetToolTip(Button3, "If this does not work. Try running as Admin.")
-
-    End Sub
-
-    
-    Private Sub ToolTip1_Popup(sender As System.Object, e As System.Windows.Forms.PopupEventArgs) Handles ToolTip1.Popup
-
-    End Sub
-
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
         Me.Hide()
-        NotifyIcon1.Visible = True
-
     End Sub
 
-    Private Sub NotifyIcon1_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles NotifyIcon1.MouseClick
+    Private Sub NotifyIcon1_BalloonTipClicked(sender As Object, e As System.EventArgs) Handles NotifyIcon1.BalloonTipClicked
         Me.Show()
-        NotifyIcon1.Visible = False
-
     End Sub
 
-    Private Sub NotifyIcon1_MouseDoubleClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
-       
+    Private Sub NotifyIcon1_DoubleClick(sender As Object, e As System.EventArgs) Handles NotifyIcon1.DoubleClick
+        Me.Show()
     End Sub
 
-  
+    Private Sub NotifyIcon1_Click(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles NotifyIcon1.Click
+        NotifyIcon1.ShowBalloonTip(200, "Clients Connected:", listofcclients + " ", ToolTipIcon.Info)
+
+    End Sub
 
     
+
+    Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
+        Dim i As Integer
+        If Button9.Text = "▼" Then
+            For i = 1 To 200
+                Me.Height += 1
+            Next
+            Button9.Text = "▲"
+        Else
+            For i = 1 To 200
+                Me.Height -= 1
+            Next
+            Button9.Text = "▼"
+        End If
+    End Sub
 End Class
