@@ -159,6 +159,8 @@ Public Class Form1
 
 
     Private Sub Button6_Click(sender As System.Object, e As System.EventArgs) Handles Button6.Click
+        DemoApp.Close()
+        DemoApp.Dispose()
         Me.Close()
         Try
             vr.StopHostedNetwork()
@@ -276,4 +278,8 @@ Public Class Form1
     End Sub
 
 
+    Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
+        DemoApp.Show()
+        Me.Visible = False
+    End Sub
 End Class

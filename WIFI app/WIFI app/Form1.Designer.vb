@@ -49,14 +49,15 @@ Partial Class Form1
         Me.MenPass = New System.Windows.Forms.ToolStripTextBox()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(79, 86)
+        Me.Button1.Location = New System.Drawing.Point(102, 86)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(66, 27)
+        Me.Button1.Size = New System.Drawing.Size(43, 27)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "..."
         Me.Button1.UseVisualStyleBackColor = True
@@ -174,9 +175,9 @@ Partial Class Form1
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(12, 86)
+        Me.Button6.Location = New System.Drawing.Point(61, 86)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(61, 27)
+        Me.Button6.Size = New System.Drawing.Size(35, 27)
         Me.Button6.TabIndex = 12
         Me.Button6.Text = "Exit"
         Me.Button6.UseVisualStyleBackColor = True
@@ -245,18 +246,28 @@ Partial Class Form1
         Me.Label4.TabIndex = 17
         Me.Label4.Text = "List of Connected Clients:"
         '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(12, 86)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(43, 27)
+        Me.Button5.TabIndex = 18
+        Me.Button5.Text = "Chat"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(272, 120)
+        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.TextBox4)
         Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.Button2)
@@ -303,5 +314,6 @@ Partial Class Form1
     Friend WithEvents MenItConf As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenSSID As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents MenPass As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents Button5 As System.Windows.Forms.Button
 
 End Class
