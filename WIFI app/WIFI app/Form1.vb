@@ -3,6 +3,7 @@ Imports Microsoft.VisualBasic.Devices
 Imports System.Windows.Forms.VisualStyles
 
 Public Class Form1
+
     Friend VirtualRouter
     Dim WithEvents vr As New VirtualRouter.Wlan.WlanManager
     Dim listofcclients As String
@@ -14,12 +15,13 @@ Public Class Form1
     Dim vbdevaud As New Microsoft.VisualBasic.Devices.Audio
     Dim i As Integer
     Dim j As Integer = 0
-
+    Dim hico, cico As Icon
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+        
         If Button1.Text = "Start" Then
             Debug.Print(My.Application.CommandLineArgs.Count)
             Validateinput()
-            
+
             vr.StopHostedNetwork()
             vr.ForceStop()
             vr.SetConnectionSettings(TextBox1.Text, 20)
@@ -41,7 +43,10 @@ Public Class Form1
         If vr.IsHostedNetworkStarted = True Then
             Hosted(True)
             If vr.Stations.Count > noconn Then
-                vbdevaud.Play(Application.StartupPath + "\connect.wav")
+                Try
+                    vbdevaud.Play(Application.StartupPath + "\connect.wav")
+                Catch ex As Exception
+                End Try
                 noconn = vr.Stations.Count
                 ListBox1.Items.Clear()
                 listofcclients = ""
@@ -51,7 +56,12 @@ Public Class Form1
                 Next
                 NotifyIcon1.ShowBalloonTip(200, "New Client Connected", "Clients Currently Connected:" + vbCrLf + listofcclients, ToolTipIcon.Info)
             ElseIf vr.Stations.Count < noconn Then
-                vbdevaud.Play(Application.StartupPath + "\disconnect.wav")
+                Try
+                    vbdevaud.Play(Application.StartupPath + "\disconnect.wav")
+                Catch exx As Exception
+                End Try
+
+
                 noconn = vr.Stations.Count
                 ListBox1.Items.Clear()
                 listofcclients = ""
@@ -75,6 +85,10 @@ Public Class Form1
 
     Private Sub Timer2_Tick(sender As System.Object, e As System.EventArgs) Handles Timer2.Tick
         ct += 1
+        If ct > 3 And ct < 5 Then
+            hico = Me.Icon
+            cico = NotifyIcon1.Icon
+        End If
         If ct > 8 Then
             TextBox1.Text = ""
             TextBox2.Text = ""
@@ -142,13 +156,9 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
-        DemoApp.Show()
-        Me.WindowState = FormWindowState.Minimized
-    End Sub
+
 
     Private Sub Button6_Click(sender As System.Object, e As System.EventArgs) Handles Button6.Click
-        DemoApp.Close()
         Me.Close()
         Try
             vr.StopHostedNetwork()
@@ -158,7 +168,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
-        MsgBox("This Application is created by Sumant Vanage." + vbCrLf + "Special Thanks to Chris Pietschmann and Unoteam", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AbouT")
+        MsgBox("This Application is created by Sumant Vanage." + vbCrLf + "Special Thanks to Chris Pietschmann", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AbouT")
     End Sub
 
     Private Sub NotifyIcon1_BalloonTipClicked(sender As Object, e As System.EventArgs) Handles NotifyIcon1.BalloonTipClicked
@@ -213,6 +223,8 @@ Public Class Form1
             ConMenuState.Text = "Stop"
             ConMenuState.ToolTipText = "Stop the HostedNetwork"
             NotifyIcon1.Text = "Clients Connected:" + vbCrLf + (listofcclients.Trim) + " "
+            NotifyIcon1.Icon = hico
+
         Else
             StateHist = False
             Button1.Text = "Start"
@@ -223,6 +235,7 @@ Public Class Form1
             ListBox1.Items.Clear()
             vr.Stations.Clear()
             Label3.Text = "No of Connected Clients:0"
+            NotifyIcon1.Icon = cico
         End If
     End Sub
     Public Sub Validateinput()
@@ -239,8 +252,8 @@ Public Class Form1
     End Sub
 
 
-   
-    
+
+
 
     Private Sub MenSSID_TextChanged(sender As Object, e As System.EventArgs) Handles MenSSID.TextChanged
         Debug.Print(MenSSID.Focused)
@@ -261,5 +274,6 @@ Public Class Form1
     Private Sub TextBox2_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox2.TextChanged
         MenPass.Text = TextBox2.Text
     End Sub
+
 
 End Class

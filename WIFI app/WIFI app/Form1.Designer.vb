@@ -37,7 +37,6 @@ Partial Class Form1
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
@@ -55,9 +54,9 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(104, 86)
+        Me.Button1.Location = New System.Drawing.Point(79, 86)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(41, 27)
+        Me.Button1.Size = New System.Drawing.Size(66, 27)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "..."
         Me.Button1.UseVisualStyleBackColor = True
@@ -163,16 +162,6 @@ Partial Class Form1
         Me.Button4.Text = "Refresh"
         Me.Button4.UseVisualStyleBackColor = True
         '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(8, 86)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(51, 27)
-        Me.Button5.TabIndex = 11
-        Me.Button5.Text = "IP Chat"
-        Me.ToolTip1.SetToolTip(Me.Button5, "Start IP Chat")
-        Me.Button5.UseVisualStyleBackColor = True
-        '
         'Button9
         '
         Me.Button9.Location = New System.Drawing.Point(151, 86)
@@ -185,9 +174,9 @@ Partial Class Form1
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(63, 86)
+        Me.Button6.Location = New System.Drawing.Point(12, 86)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(35, 27)
+        Me.Button6.Size = New System.Drawing.Size(61, 27)
         Me.Button6.TabIndex = 12
         Me.Button6.Text = "Exit"
         Me.Button6.UseVisualStyleBackColor = True
@@ -205,27 +194,27 @@ Partial Class Form1
         '
         Me.NotifyIcon1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
-        Me.NotifyIcon1.Text = " "
+        Me.NotifyIcon1.Text = " Wifi Host"
         Me.NotifyIcon1.Visible = True
         '
         'ContextMenuStrip1
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConMenuState, Me.MenItConf})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 70)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(111, 48)
         Me.ContextMenuStrip1.Text = "etet"
         '
         'ConMenuState
         '
         Me.ConMenuState.Name = "ConMenuState"
-        Me.ConMenuState.Size = New System.Drawing.Size(152, 22)
+        Me.ConMenuState.Size = New System.Drawing.Size(110, 22)
         Me.ConMenuState.Text = "start"
         '
         'MenItConf
         '
         Me.MenItConf.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenSSID, Me.MenPass})
         Me.MenItConf.Name = "MenItConf"
-        Me.MenItConf.Size = New System.Drawing.Size(152, 22)
+        Me.MenItConf.Size = New System.Drawing.Size(110, 22)
         Me.MenItConf.Text = "Config"
         '
         'MenSSID
@@ -265,9 +254,8 @@ Partial Class Form1
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Button7)
-        Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.TextBox4)
         Me.Controls.Add(Me.TextBox3)
@@ -283,7 +271,7 @@ Partial Class Form1
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.Text = "Wifi Host n Chat"
+        Me.Text = "Wifi Host"
         Me.TopMost = True
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -303,7 +291,6 @@ Partial Class Form1
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button7 As System.Windows.Forms.Button
