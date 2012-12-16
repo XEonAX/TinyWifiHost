@@ -39,13 +39,18 @@ Partial Class Form1
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ConMenuState = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenItConf = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenSSID = New System.Windows.Forms.ToolStripTextBox()
+        Me.MenPass = New System.Windows.Forms.ToolStripTextBox()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
@@ -60,7 +65,7 @@ Partial Class Form1
         'Timer1
         '
         Me.Timer1.Enabled = True
-        Me.Timer1.Interval = 10
+        Me.Timer1.Interval = 1000
         '
         'TextBox1
         '
@@ -168,24 +173,13 @@ Partial Class Form1
         Me.ToolTip1.SetToolTip(Me.Button5, "Start IP Chat")
         Me.Button5.UseVisualStyleBackColor = True
         '
-        'Button8
-        '
-        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 4.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button8.Location = New System.Drawing.Point(151, 86)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(39, 27)
-        Me.Button8.TabIndex = 14
-        Me.Button8.Text = "Minimize"
-        Me.ToolTip1.SetToolTip(Me.Button8, "Minimize to Tray")
-        Me.Button8.UseVisualStyleBackColor = True
-        '
         'Button9
         '
-        Me.Button9.Location = New System.Drawing.Point(196, 86)
+        Me.Button9.Location = New System.Drawing.Point(151, 86)
         Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(29, 27)
+        Me.Button9.Size = New System.Drawing.Size(67, 27)
         Me.Button9.TabIndex = 16
-        Me.Button9.Text = "▼"
+        Me.Button9.Text = "Clients ▼"
         Me.ToolTip1.SetToolTip(Me.Button9, "List of Connected Clients")
         Me.Button9.UseVisualStyleBackColor = True
         '
@@ -209,9 +203,40 @@ Partial Class Form1
         '
         'NotifyIcon1
         '
+        Me.NotifyIcon1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
-        Me.NotifyIcon1.Text = "Click to Show Connected Clients. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "DoubleClick to Show window."
+        Me.NotifyIcon1.Text = " "
         Me.NotifyIcon1.Visible = True
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConMenuState, Me.MenItConf})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 70)
+        Me.ContextMenuStrip1.Text = "etet"
+        '
+        'ConMenuState
+        '
+        Me.ConMenuState.Name = "ConMenuState"
+        Me.ConMenuState.Size = New System.Drawing.Size(152, 22)
+        Me.ConMenuState.Text = "start"
+        '
+        'MenItConf
+        '
+        Me.MenItConf.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenSSID, Me.MenPass})
+        Me.MenItConf.Name = "MenItConf"
+        Me.MenItConf.Size = New System.Drawing.Size(152, 22)
+        Me.MenItConf.Text = "Config"
+        '
+        'MenSSID
+        '
+        Me.MenSSID.Name = "MenSSID"
+        Me.MenSSID.Size = New System.Drawing.Size(100, 23)
+        '
+        'MenPass
+        '
+        Me.MenPass.Name = "MenPass"
+        Me.MenPass.Size = New System.Drawing.Size(100, 23)
         '
         'ListBox1
         '
@@ -239,7 +264,6 @@ Partial Class Form1
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.ListBox1)
-        Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
@@ -260,7 +284,8 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "Wifi Host n Chat"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
+        Me.TopMost = True
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -283,9 +308,13 @@ Partial Class Form1
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
-    Friend WithEvents Button8 As System.Windows.Forms.Button
     Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
     Friend WithEvents Button9 As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents ConMenuState As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenItConf As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenSSID As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents MenPass As System.Windows.Forms.ToolStripTextBox
 
 End Class
