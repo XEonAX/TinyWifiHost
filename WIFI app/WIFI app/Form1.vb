@@ -159,8 +159,8 @@ Public Class Form1
 
 
     Private Sub Button6_Click(sender As System.Object, e As System.EventArgs) Handles Button6.Click
-        DemoApp.Close()
-        DemoApp.Dispose()
+        DemoApp.Close()  'remove this to remove chat and
+        DemoApp.Dispose() 'remove this to remove chat and
         Me.Close()
         Try
             vr.StopHostedNetwork()
@@ -278,10 +278,10 @@ Public Class Form1
     End Sub
 
 
-    Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
-        DemoApp.Show()
-        Me.Visible = False
-    End Sub
+    Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click  'remove this to remove chat and
+        DemoApp.Show() 'remove this to remove chat and
+        Me.Visible = False 'remove this to remove chat and
+    End Sub 'remove this to remove chat also remove button5
 
     Private Sub ConMenuExit_Click(sender As System.Object, e As System.EventArgs) Handles ConMenuExit.Click
         Button6_Click(ConMenuExit, EventArgs.Empty)
