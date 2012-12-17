@@ -47,6 +47,7 @@ Partial Class Form1
         Me.MenItConf = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenSSID = New System.Windows.Forms.ToolStripTextBox()
         Me.MenPass = New System.Windows.Forms.ToolStripTextBox()
+        Me.ConMenuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -55,9 +56,9 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(102, 86)
+        Me.Button1.Location = New System.Drawing.Point(99, 86)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(43, 27)
+        Me.Button1.Size = New System.Drawing.Size(46, 27)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "..."
         Me.Button1.UseVisualStyleBackColor = True
@@ -175,9 +176,9 @@ Partial Class Form1
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(61, 86)
+        Me.Button6.Location = New System.Drawing.Point(59, 86)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(35, 27)
+        Me.Button6.Size = New System.Drawing.Size(34, 27)
         Me.Button6.TabIndex = 12
         Me.Button6.Text = "Exit"
         Me.Button6.UseVisualStyleBackColor = True
@@ -200,33 +201,41 @@ Partial Class Form1
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConMenuState, Me.MenItConf})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConMenuState, Me.MenItConf, Me.ConMenuExit})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(111, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 92)
         Me.ContextMenuStrip1.Text = "etet"
         '
         'ConMenuState
         '
         Me.ConMenuState.Name = "ConMenuState"
-        Me.ConMenuState.Size = New System.Drawing.Size(110, 22)
-        Me.ConMenuState.Text = "start"
+        Me.ConMenuState.Size = New System.Drawing.Size(152, 22)
+        Me.ConMenuState.Text = "Start"
         '
         'MenItConf
         '
         Me.MenItConf.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenSSID, Me.MenPass})
         Me.MenItConf.Name = "MenItConf"
-        Me.MenItConf.Size = New System.Drawing.Size(110, 22)
+        Me.MenItConf.Size = New System.Drawing.Size(152, 22)
         Me.MenItConf.Text = "Config"
         '
         'MenSSID
         '
         Me.MenSSID.Name = "MenSSID"
         Me.MenSSID.Size = New System.Drawing.Size(100, 23)
+        Me.MenSSID.ToolTipText = "SSID"
         '
         'MenPass
         '
         Me.MenPass.Name = "MenPass"
         Me.MenPass.Size = New System.Drawing.Size(100, 23)
+        Me.MenPass.ToolTipText = "Password"
+        '
+        'ConMenuExit
+        '
+        Me.ConMenuExit.Name = "ConMenuExit"
+        Me.ConMenuExit.Size = New System.Drawing.Size(152, 22)
+        Me.ConMenuExit.Text = "Exit"
         '
         'ListBox1
         '
@@ -250,7 +259,7 @@ Partial Class Form1
         '
         Me.Button5.Location = New System.Drawing.Point(12, 86)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(43, 27)
+        Me.Button5.Size = New System.Drawing.Size(41, 27)
         Me.Button5.TabIndex = 18
         Me.Button5.Text = "Chat"
         Me.Button5.UseVisualStyleBackColor = True
@@ -267,8 +276,8 @@ Partial Class Form1
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.TextBox4)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label3)
@@ -282,7 +291,7 @@ Partial Class Form1
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.Text = "Wifi Host"
+        Me.Text = "Wifi Host n Chat"
         Me.TopMost = True
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -314,6 +323,7 @@ Partial Class Form1
     Friend WithEvents MenItConf As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenSSID As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents MenPass As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents ConMenuExit As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Button5 As System.Windows.Forms.Button
 
 End Class
