@@ -87,6 +87,7 @@ Public Class Form1
         If ct > 3 And ct < 5 Then
             hico = Me.Icon
             cico = NotifyIcon1.Icon
+            Me.Icon = cico
         End If
         If ct > 8 Then
             TextBox1.Text = ""
@@ -225,7 +226,7 @@ Public Class Form1
             ConMenuState.ToolTipText = "Stop the HostedNetwork"
             NotifyIcon1.Text = "Clients Connected:" + vbCrLf + (listofcclients.Trim) + " "
             NotifyIcon1.Icon = hico
-
+            Me.Icon = hico
         Else
             StateHist = False
             Button1.Text = "Start"
@@ -237,6 +238,7 @@ Public Class Form1
             vr.Stations.Clear()
             Label3.Text = "No of Connected Clients:0"
             NotifyIcon1.Icon = cico
+            Me.Icon = cico
         End If
     End Sub
     Public Sub Validateinput()
@@ -285,4 +287,7 @@ Public Class Form1
         Button6_Click(ConMenuExit, EventArgs.Empty)
 
     End Sub
+
+
+   
 End Class
