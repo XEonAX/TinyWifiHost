@@ -106,14 +106,15 @@ Public Class Form1
             noconn = 0
             Me.WindowState = FormWindowState.Normal
         End If
-        If ct > 10 Then
+        If ct > 90 Or Button1.Text = "Start" Then
 
             If My.Application.CommandLineArgs.Contains("autostart") Then
                 vr.StopHostedNetwork()
                 vr.ForceStop()
                 Validateinput()
-                Button1_Click(Me, EventArgs.Empty)
                 Me.WindowState = FormWindowState.Minimized
+                Button1_Click(Me, EventArgs.Empty)
+
             End If
             Timer2.Enabled = False
             ct = 100
@@ -211,6 +212,7 @@ Public Class Form1
         End If
         If Me.WindowState = FormWindowState.Normal Then
             Me.Show()
+            Me.Focus()
         End If
     End Sub
 
