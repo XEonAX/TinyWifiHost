@@ -1,6 +1,5 @@
 ﻿Imports System.Net
 Imports Microsoft.VisualBasic.Devices
-Imports System.Windows.Forms.VisualStyles
 
 Public Class Form1
 
@@ -19,7 +18,7 @@ Public Class Form1
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
         
         If Button1.Text = "Start" Then
-            Debug.Print(My.Application.CommandLineArgs.Count)
+            'Debug.Print(My.Application.CommandLineArgs.Count)
             Validateinput()
 
             vr.StopHostedNetwork()
@@ -93,10 +92,10 @@ Public Class Form1
             TextBox1.Text = ""
             TextBox2.Text = ""
             listofcclients = ""
-            Debug.Print(My.Application.CommandLineArgs.Count)
+            'Debug.Print(My.Application.CommandLineArgs.Count)
             If My.Application.CommandLineArgs.Count > 0 Then
                 For Each cmd In My.Application.CommandLineArgs
-                    Debug.Print(cmd)
+                    'Debug.Print(cmd)
                     If cmd.StartsWith("ssid=") Then TextBox1.Text = cmd.Substring(5)
                     If cmd.StartsWith("pass=") Then TextBox2.Text = cmd.Substring(5)
                 Next
@@ -139,7 +138,7 @@ Public Class Form1
 
     Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
         Try
-            Shell("netsh interface ip set address """ + TextBox3.Text + """ static " + TextBox4.Text + " 255.255.255.0 " + TextBox4.Text + " 2", AppWinStyle.MaximizedFocus)
+            Shell("netsh interface ip set address """ + TextBox3.Text + """ static " + TextBox4.Text + " 255.255.255.0 " + TextBox4.Text + " 2", AppWinStyle.Hide)
         Catch ex As Exception
             MsgBox(ex.ToString + vbCrLf + "Try Running as admin.", MsgBoxStyle.Information) '"Try Running as admin.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
         End Try
@@ -149,7 +148,7 @@ Public Class Form1
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
 
         If j < System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName).AddressList.Length Then
-            TextBox4.Text = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName).AddressList(i).ToString()
+            TextBox4.Text = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName).AddressList(j).ToString()
             j += 1
         Else
             j = 0
@@ -258,7 +257,6 @@ Public Class Form1
 
 
     Private Sub MenSSID_TextChanged(sender As Object, e As System.EventArgs) Handles MenSSID.TextChanged
-        Debug.Print(MenSSID.Focused)
         If MenSSID.Focused Then
             TextBox1.Text = MenSSID.Text
         End If
@@ -281,5 +279,10 @@ Public Class Form1
     Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
         DemoApp.Show()
         Me.Visible = False
+    End Sub
+
+    Private Sub ConMenuExit_Click(sender As System.Object, e As System.EventArgs) Handles ConMenuExit.Click
+        Button6_Click(ConMenuExit, EventArgs.Empty)
+
     End Sub
 End Class
