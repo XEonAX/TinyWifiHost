@@ -71,7 +71,7 @@ Public Class Form1B
                 ListBox1.Items.Clear()
                 listofcclients = ""
                 For Each keyy In vr.Stations.Keys
-                    ListBox1.Items.Add(keyy)
+                    ListBox1.Items.Add(vr.Stations.Item(keyy).MacAddress.ToString)
                     listofcclients += keyy + vbCrLf
                 Next
                 NotifyIcon1.ShowBalloonTip(200, "Client Disconnected", "Clients Currently Connected:" + vbCrLf + listofcclients, ToolTipIcon.Info)
@@ -86,8 +86,7 @@ Public Class Form1B
         ElseIf vr.HostedNetworkState = Global.VirtualRouter.Wlan.WinAPI.WLAN_HOSTED_NETWORK_STATE.wlan_hosted_network_unavailable Then
             Hosted(False)
         End If
-
-
+        
     End Sub
 
     Private Sub Timer2_Tick(sender As System.Object, e As System.EventArgs) Handles Timer2.Tick
@@ -196,14 +195,14 @@ Public Class Form1B
     Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
 
         If Button9.Text = "Clients && ICS ▼" Then
-            For Me.i = 1 To 50
+            For Me.i = 1 To 48
                 Me.Height += 4
                 Me.Width += 4
                 Me.Refresh()
             Next
             Button9.Text = "Clients && ICS ▲"
         Else
-            For Me.i = 1 To 200
+            For Me.i = 1 To 192
                 Me.Height -= 1
                 Me.Width -= 1
             Next
