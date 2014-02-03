@@ -122,7 +122,7 @@ Partial Class Form1B
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(112, 27)
         Me.Button9.TabIndex = 16
-        Me.Button9.Text = "Clients && ICS ▼"
+        Me.Button9.Text = "Clients && ICS..."
         Me.ToolTip1.SetToolTip(Me.Button9, "List of Connected Clients")
         Me.Button9.UseVisualStyleBackColor = True
         '
