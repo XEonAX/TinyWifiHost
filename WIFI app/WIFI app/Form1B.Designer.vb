@@ -310,7 +310,7 @@ Partial Class Form1B
         Me.MaximizeBox = False
         Me.Name = "Form1B"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.Text = "Wifi Host"
+        Me.Text = "Tiny Wifi Host"
         Me.TopMost = True
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
