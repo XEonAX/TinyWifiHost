@@ -218,12 +218,12 @@ Public Class Form1B
         For Each Intface In ics.Connections
             ListBox2.Items.Add(Intface.Name)
             ListBox3.Items.Add(Intface.Name)
-            If Intface.IsPublic = True Then
-                Debug.Print(">>" + Intface.Name)
-                ListBox2.SelectedIndex = IntfaceIndex
-            End If
+            '  If Intface.IsPublic = True Then
+            '  Debug.Print(">>" + Intface.Name)
+            '   ListBox2.SelectedIndex = IntfaceIndex
+            '   End If
             If Intface.IsPrivate = True Then
-                Debug.Print("<<" + Intface.Name)
+                'Debug.Print("<<" + Intface.Name)
                 ListBox3.SelectedIndex = IntfaceIndex
             End If
             IntfaceIndex += 1
@@ -321,15 +321,19 @@ Public Class Form1B
 
 
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
-        Try
-            ics.Init()
-            ics.EnableIcs(ics.Connections.Item(ListBox2.SelectedIndex).Guid, ics.Connections.Item(ListBox3.SelectedIndex).Guid)
+        If ListBox2.SelectedIndex > -1 And ListBox3.SelectedIndex > -1 Then
+            Try
+                ics.Init()
+                ics.EnableIcs(ics.Connections.Item(ListBox2.SelectedIndex).Guid, ics.Connections.Item(ListBox3.SelectedIndex).Guid)
 
-        Catch ex As Exception
-            NotifyIcon1.BalloonTipTitle = "Error"
-            NotifyIcon1.BalloonTipText = ex.Message.ToString
-            NotifyIcon1.ShowBalloonTip(4000)
-        End Try
+            Catch ex As Exception
+                NotifyIcon1.BalloonTipTitle = "Error"
+                NotifyIcon1.BalloonTipText = ex.Message.ToString
+                NotifyIcon1.ShowBalloonTip(4000)
+            End Try
+        Else
+            MsgBox("Please select the Interface over which to share Internet connection.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "No Interface Selected")
+        End If
 
 
     End Sub
