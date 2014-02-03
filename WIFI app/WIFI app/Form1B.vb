@@ -1,5 +1,6 @@
 ﻿Imports System.Net
 Imports Microsoft.VisualBasic.Devices
+Imports System.Reflection
 
 Public Class Form1B
 
@@ -86,7 +87,7 @@ Public Class Form1B
         ElseIf vr.HostedNetworkState = Global.VirtualRouter.Wlan.WinAPI.WLAN_HOSTED_NETWORK_STATE.wlan_hosted_network_unavailable Then
             Hosted(False)
         End If
-        
+
     End Sub
 
     Private Sub Timer2_Tick(sender As System.Object, e As System.EventArgs) Handles Timer2.Tick
@@ -175,7 +176,7 @@ Public Class Form1B
     End Sub
 
     Private Sub NotifyIcon1_Click(sender As Object, e As System.EventArgs) Handles NotifyIcon1.Click
-        
+
         NotifyIcon1.ShowBalloonTip(3000, "Connected Clients:", listofcclients, ToolTipIcon.Info)
 
     End Sub
@@ -187,11 +188,6 @@ Public Class Form1B
             Me.Visible = True
         End If
     End Sub
-
-
-
-
-
     Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
 
         If Button9.Text = "Clients && ICS..." Then
@@ -208,26 +204,32 @@ Public Class Form1B
             Next
             Button9.Text = "Clients && ICS..."
         End If
-        
-    End Sub
 
+    End Sub
+   
     Private Sub Form1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         Me.Width = 278
         Me.Height = 146
-        Dim IntfaceIndex As Integer = 0
-        For Each Intface In ics.Connections
-            ListBox2.Items.Add(Intface.Name)
-            ListBox3.Items.Add(Intface.Name)
-            '  If Intface.IsPublic = True Then
-            '  Debug.Print(">>" + Intface.Name)
-            '   ListBox2.SelectedIndex = IntfaceIndex
-            '   End If
-            If Intface.IsPrivate = True Then
-                'Debug.Print("<<" + Intface.Name)
-                ListBox3.SelectedIndex = IntfaceIndex
-            End If
-            IntfaceIndex += 1
-        Next
+        Try
+            Dim IntfaceIndex As Integer = 0
+            For Each Intface In ics.Connections
+                ListBox2.Items.Add(Intface.Name)
+                ListBox3.Items.Add(Intface.Name)
+                '  If Intface.IsPublic = True Then
+                '  Debug.Print(">>" + Intface.Name)
+                '   ListBox2.SelectedIndex = IntfaceIndex
+                '   End If
+                If Intface.IsPrivate = True Then
+                    'Debug.Print("<<" + Intface.Name)
+                    ListBox3.SelectedIndex = IntfaceIndex
+                End If
+                IntfaceIndex += 1
+            Next
+        Catch ex As Exception
+            NotifyIcon1.BalloonTipTitle = "Error"
+            NotifyIcon1.BalloonTipText = ex.Message.ToString
+            NotifyIcon1.ShowBalloonTip(4000)
+        End Try
 
     End Sub
 
