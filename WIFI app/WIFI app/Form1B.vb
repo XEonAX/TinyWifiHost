@@ -171,21 +171,32 @@ Public Class Form1B
     End Sub
 
     Private Sub NotifyIcon1_BalloonTipClicked(sender As Object, e As System.EventArgs) Handles NotifyIcon1.BalloonTipClicked
-        Me.WindowState = FormWindowState.Normal
-        Me.Focus()
+        If Me.Visible = True Then
+            Me.Visible = False
+            Me.WindowState = FormWindowState.Minimized
+        Else
+            Me.Visible = True
+            Me.WindowState = FormWindowState.Normal
+        End If
     End Sub
 
     Private Sub NotifyIcon1_Click(sender As Object, e As System.EventArgs) Handles NotifyIcon1.Click
-
-        NotifyIcon1.ShowBalloonTip(3000, "Connected Clients:", listofcclients, ToolTipIcon.Info)
+        NotifyIcon1.ShowBalloonTip(800, "Client Disconnected", listofcclients + " ", ToolTipIcon.Info)
 
     End Sub
+
+    
+
+
+   
 
     Private Sub NotifyIcon1_DoubleClick(sender As Object, e As System.EventArgs) Handles NotifyIcon1.DoubleClick
         If Me.Visible = True Then
             Me.Visible = False
+            Me.WindowState = FormWindowState.Minimized
         Else
             Me.Visible = True
+            Me.WindowState = FormWindowState.Normal
         End If
     End Sub
     Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
@@ -236,12 +247,11 @@ Public Class Form1B
 
 
     Private Sub Form1_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
-        If Me.WindowState = FormWindowState.Minimized Then
-            Me.Hide()
-        End If
         If Me.WindowState = FormWindowState.Normal Then
-            Me.Show()
-            Me.Focus()
+            Me.ShowInTaskbar = True
+        End If
+        If Me.WindowState = FormWindowState.Minimized Then
+            Me.ShowInTaskbar = False
         End If
     End Sub
 
@@ -344,7 +354,14 @@ Public Class Form1B
         ics.DisableIcsOnAll()
     End Sub
 
-    Private Sub NotifyIcon1_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles NotifyIcon1.MouseMove
+   
 
-    End Sub
+    
+
+
+
+
+  
+
+   
 End Class
