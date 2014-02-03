@@ -166,7 +166,7 @@ Public Class Form1B
     End Sub
 
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
-        MsgBox("This Application is created by Sumant Vanage." + vbCrLf + "Special Thanks to Chris Pietschmann", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AbouT")
+        MsgBox("This Application is created by Sumant Vanage." + vbCrLf + "Special Thanks to Chris Pietschmann" + vbCrLf + "And Microsoft.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AbouT")
     End Sub
 
     Private Sub NotifyIcon1_BalloonTipClicked(sender As Object, e As System.EventArgs) Handles NotifyIcon1.BalloonTipClicked

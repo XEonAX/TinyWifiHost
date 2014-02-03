@@ -64,9 +64,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.WIFI_app.My.MySettings
+        Friend ReadOnly Property Settings() As Global.Tiny_Wifi_Host.My.MySettings
             Get
-                Return Global.WIFI_app.My.MySettings.Default
+                Return Global.Tiny_Wifi_Host.My.MySettings.Default
             End Get
         End Property
     End Module
