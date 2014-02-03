@@ -217,6 +217,12 @@ Public Class Form1B
         End If
 
     End Sub
+
+    Private Sub Form1B_Disposed(sender As Object, e As System.EventArgs) Handles Me.Disposed
+        NotifyIcon1.Dispose()
+    End Sub
+
+
    
     Private Sub Form1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         Me.Width = 278
