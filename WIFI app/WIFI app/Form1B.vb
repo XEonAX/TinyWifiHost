@@ -10,7 +10,7 @@ Public Class Form1B
     Dim ct As Integer = 0
     Dim noconn As Integer = 0
     Dim StateHist As Boolean
-    Dim mytask As System.Threading.Tasks.Task
+    'im mytask As System.Threading.Tasks.Task
     'Dim arr() As String = {"0"}
     Dim vbdevaud As New Microsoft.VisualBasic.Devices.Audio
     Dim i As Integer
