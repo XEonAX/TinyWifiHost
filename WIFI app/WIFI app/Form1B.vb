@@ -194,19 +194,19 @@ Public Class Form1B
 
     Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
 
-        If Button9.Text = "Clients && ICS ▼" Then
+        If Button9.Text = "Clients && ICS..." Then
             For Me.i = 1 To 48
                 Me.Height += 4
                 Me.Width += 4
                 Me.Refresh()
             Next
-            Button9.Text = "Clients && ICS ▲"
+            Button9.Text = "Clients && ICS."
         Else
             For Me.i = 1 To 192
                 Me.Height -= 1
                 Me.Width -= 1
             Next
-            Button9.Text = "Clients && ICS ▼"
+            Button9.Text = "Clients && ICS..."
         End If
         
     End Sub
