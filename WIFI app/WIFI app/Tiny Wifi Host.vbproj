@@ -8,8 +8,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{398B975A-3877-4FAF-A541-E422DAACBC87}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>WIFI_app.My.MyApplication</StartupObject>
-    <RootNamespace>WIFI_app</RootNamespace>
+    <StartupObject>Tiny_Wifi_Host.My.MyApplication</StartupObject>
+    <RootNamespace>Tiny_Wifi_Host</RootNamespace>
     <AssemblyName>Wifi Host</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
@@ -240,7 +240,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="My Project\DataSources\" />
-    <Folder Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

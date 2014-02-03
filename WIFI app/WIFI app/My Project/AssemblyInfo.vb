@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("WIFI app")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyTitle("Tiny Wifi Host")> 
+<Assembly: AssemblyDescription("Tiny Wifi Hotspot creator with ICS")> 
+<Assembly: AssemblyCompany("AEonAX")> 
 <Assembly: AssemblyProduct("WIFI app")> 
-<Assembly: AssemblyCopyright("Copyright ©  2012")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyCopyright("©Sumant Vanage  2014")> 
+<Assembly: AssemblyTrademark("AEonAX")> 
 
 <Assembly: ComVisible(False)>
 
