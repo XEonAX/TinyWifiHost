@@ -49,7 +49,7 @@ Public Class Form1B
             End If
         Catch ex As Exception
             NotifyIcon1.BalloonTipTitle = "Error"
-            NotifyIcon1.BalloonTipText = ex.Message.ToString
+            NotifyIcon1.BalloonTipText = ex.Message.ToString & vbCrLf & "Try running this command in an elevated command prompt." & vbCrLf & "'netsh wlan set hostednetwork mode=allow'"
             NotifyIcon1.ShowBalloonTip(4000)
         End Try
     End Sub
@@ -288,7 +288,7 @@ Public Class Form1B
         Catch ex As Exception
             Debug.Print(ex.Message.ToString)
             NotifyIcon1.BalloonTipTitle = "Error"
-            NotifyIcon1.BalloonTipText = ex.Message.ToString
+            NotifyIcon1.BalloonTipText = ex.Message.ToString & vbCrLf & "Try running this program as administrator."
             NotifyIcon1.ShowBalloonTip(4000)
         End Try
 
