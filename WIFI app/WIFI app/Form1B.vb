@@ -261,7 +261,7 @@ Public Class Form1B
         'LoadDevices()
         Try
             table.ReadXmlSchema("devices.xsd")
-            table.ReadXml("devices.xmlx")
+            table.ReadXml("devices.xml")
             For Each row As DataRow In table.Rows
                 devices.Add(row.Item(0), row.Item(1))
             Next
@@ -458,7 +458,7 @@ Public Class Form1B
         Next
 
         table.AcceptChanges()
-        table.WriteXml("devices.xmlx")
+        table.WriteXml("devices.xml")
     End Sub
     Public Sub LoadDevices()
         'Checking if file exists, if no exit method
