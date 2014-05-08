@@ -194,7 +194,14 @@ Public Class Form1B
     End Sub
 
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
-        MsgBox("This Application is created by Sumant Vanage." + vbCrLf + "Special Thanks to Chris Pietschmann" + vbCrLf + "And Microsoft.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AbouT")
+        Try
+            Process.Start("http://wifihnc.codeplex.com/")
+        Catch ex As Exception
+            NotifyIcon1.BalloonTipTitle = "Error"
+            NotifyIcon1.BalloonTipText = ex.Message.ToString
+            NotifyIcon1.ShowBalloonTip(4000)
+        End Try
+        ' MsgBox("This Application is created by Sumant Vanage." + vbCrLf + "Special Thanks to Chris Pietschmann" + vbCrLf + "And Microsoft.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AbouT")
     End Sub
 
     Private Sub NotifyIcon1_BalloonTipClicked(sender As Object, e As System.EventArgs) Handles NotifyIcon1.BalloonTipClicked

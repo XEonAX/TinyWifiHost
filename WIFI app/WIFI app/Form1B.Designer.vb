@@ -142,6 +142,7 @@ Partial Class Form1B
         Me.Button7.Size = New System.Drawing.Size(83, 29)
         Me.Button7.TabIndex = 13
         Me.Button7.Text = "About"
+        Me.ToolTip1.SetToolTip(Me.Button7, "Opens project homepage on codeplex.")
         Me.Button7.UseVisualStyleBackColor = True
         '
         'NotifyIcon1
