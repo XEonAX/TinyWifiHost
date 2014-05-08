@@ -1,4 +1,6 @@
-﻿Imports System
+﻿Imports System.Resources
+
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -9,13 +11,13 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("Tiny Wifi Host")> 
-<Assembly: AssemblyDescription("Tiny Wifi Hotspot creator with ICS")> 
+<Assembly: AssemblyDescription("Tiny Wifi Hotspot Creator with Internet Connection Sharing")> 
 <Assembly: AssemblyCompany("AEonAX")> 
 <Assembly: AssemblyProduct("WIFI app")> 
 <Assembly: AssemblyCopyright("©Sumant Vanage  2014")> 
 <Assembly: AssemblyTrademark("AEonAX")> 
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(False)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("05f27885-2e00-4078-b75e-a42666d1a1e3")> 
@@ -32,4 +34,6 @@ Imports System.Runtime.InteropServices
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
 <Assembly: AssemblyVersion("2.0.*")> 
-<Assembly: AssemblyFileVersion("2.0.0.3")> 
+<Assembly: AssemblyFileVersion("3.0.0.0")> 
+
+<Assembly: NeutralResourcesLanguageAttribute("en")> 
