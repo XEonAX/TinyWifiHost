@@ -50,7 +50,7 @@ Public Class Form1B
         Catch ex As Exception
             NotifyIcon1.BalloonTipTitle = "Error"
             NotifyIcon1.BalloonTipText = ex.Message.ToString & vbCrLf & "Try running this command in an elevated command prompt." & vbCrLf & "'netsh wlan set hostednetwork mode=allow'"
-            NotifyIcon1.ShowBalloonTip(4000)
+            NotifyIcon1.ShowBalloonTip(5000)
         End Try
     End Sub
 
@@ -77,7 +77,7 @@ Public Class Form1B
                         listofcclients += vbCrLf + devices.Item(station.Key).ToString
                     End If
                 Next
-                NotifyIcon1.ShowBalloonTip(200, "New Client Connected", "Clients Currently Connected:" + listofcclients, ToolTipIcon.Info)
+                NotifyIcon1.ShowBalloonTip(200, "New Client Connected", "Clients Currently Connected:" + Trim(listofcclients), ToolTipIcon.Info)
 
             ElseIf vr.Stations.Count < noconn Then
                 Try
@@ -98,7 +98,7 @@ Public Class Form1B
                         listofcclients += vbCrLf + devices.Item(station.Key).ToString
                     End If
                 Next
-                NotifyIcon1.ShowBalloonTip(200, "Client Disconnected", "Clients Currently Connected:" + listofcclients, ToolTipIcon.Info)
+                NotifyIcon1.ShowBalloonTip(200, "Client Disconnected", "Clients Currently Connected:" + Trim(listofcclients), ToolTipIcon.Info)
             End If
             If vr.Stations.Count > alertcount Then
                 Try
@@ -199,7 +199,7 @@ Public Class Form1B
         Catch ex As Exception
             NotifyIcon1.BalloonTipTitle = "Error"
             NotifyIcon1.BalloonTipText = ex.Message.ToString
-            NotifyIcon1.ShowBalloonTip(4000)
+            NotifyIcon1.ShowBalloonTip(5000)
         End Try
         ' MsgBox("This Application is created by Sumant Vanage." + vbCrLf + "Special Thanks to Chris Pietschmann" + vbCrLf + "And Microsoft.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AbouT")
     End Sub
@@ -215,7 +215,7 @@ Public Class Form1B
     End Sub
 
     Private Sub NotifyIcon1_Click(sender As Object, e As System.EventArgs) Handles NotifyIcon1.Click
-        NotifyIcon1.ShowBalloonTip(800, "Client Disconnected", listofcclients + " ", ToolTipIcon.Info)
+        NotifyIcon1.ShowBalloonTip(800, "Clients Connected", listofcclients + " ", ToolTipIcon.Info)
 
     End Sub
 
@@ -289,7 +289,7 @@ Public Class Form1B
             Debug.Print(ex.Message.ToString)
             NotifyIcon1.BalloonTipTitle = "Error"
             NotifyIcon1.BalloonTipText = ex.Message.ToString & vbCrLf & "Try running this program as administrator."
-            NotifyIcon1.ShowBalloonTip(4000)
+            NotifyIcon1.ShowBalloonTip(5000)
         End Try
 
     End Sub
@@ -392,7 +392,7 @@ Public Class Form1B
             Catch ex As Exception
                 NotifyIcon1.BalloonTipTitle = "Error"
                 NotifyIcon1.BalloonTipText = ex.Message.ToString
-                NotifyIcon1.ShowBalloonTip(4000)
+                NotifyIcon1.ShowBalloonTip(5000)
             End Try
         Else
             MsgBox("Please select the Interface over which to share Internet connection.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "No Interface Selected")
