@@ -1,10 +1,14 @@
 ﻿Imports System.Net
 Imports Microsoft.VisualBasic.Devices
 Imports System.Reflection
+Imports System.Xml
+Imports System.IO
+Imports System.Resources
+Imports System.Data
 
 Public Class Form1B
-
-    Friend VirtualRouter
+    Dim alertcount As Integer = 100
+    Dim devices As New Hashtable
     Dim WithEvents vr As New VirtualRouter.Wlan.WlanManager
     Dim WithEvents ics As New IcsMgr.IcsManager
     Dim listofcclients As String = ""
@@ -17,12 +21,14 @@ Public Class Form1B
     Dim i As Integer
     Dim j As Integer = 0
     Dim hico, cico As Icon
+    Dim table As New DataTable
+
+
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
         Try
             If Button1.Text = "Start" Then
                 'Debug.Print(My.Application.CommandLineArgs.Count)
                 Validateinput()
-
                 vr.StopHostedNetwork()
                 vr.ForceStop()
                 vr.SetConnectionSettings(TextBox1.Text, 20)
@@ -32,11 +38,14 @@ Public Class Form1B
                 Timer2.Enabled = True
                 Hosted(True)
             Else
-                Timer2.Enabled = True
+                Timer2.Enabled = False
                 vr.StopHostedNetwork()
                 vr.ForceStop()
                 vr.QuerySecondaryKey(TextBox2.Text, vbNull, vbNull)
                 Hosted(False)
+                Timer1_Tick(Button1, System.EventArgs.Empty)
+                Timer1.Enabled = False
+
             End If
         Catch ex As Exception
             NotifyIcon1.BalloonTipTitle = "Error"
@@ -45,10 +54,11 @@ Public Class Form1B
         End Try
     End Sub
 
-    Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles Timer1.Tick
+    Public Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles Timer1.Tick
+
         If vr.IsHostedNetworkStarted = True Then
-            Hosted(True)
-            If vr.Stations.Count > noconn Then
+            Hosted(True) 'Show hosted network started
+            If vr.Stations.Count > noconn Then   'new client connected
                 Try
                     vbdevaud.Play(Application.StartupPath + "\connect.wav")
                 Catch ex As Exception
@@ -56,27 +66,45 @@ Public Class Form1B
                 noconn = vr.Stations.Count
                 ListBox1.Items.Clear()
                 listofcclients = ""
-                For Each keyy In vr.Stations.Keys
-                    ListBox1.Items.Add(keyy)
-                    listofcclients += keyy + vbCrLf
+                For Each station In vr.Stations
+                    If IsNothing(devices.Item(station.Key)) Then
+                        devices.Add(station.Key, "Unnamed")
+                        SaveDevices()
+                        ListBox1.Items.Add(station.Key & " - " & devices.Item(station.Key).ToString)
+                        listofcclients += vbCrLf + station.Key
+                    Else
+                        ListBox1.Items.Add(station.Key & " - " & devices.Item(station.Key).ToString)
+                        listofcclients += vbCrLf + devices.Item(station.Key).ToString
+                    End If
                 Next
-                NotifyIcon1.ShowBalloonTip(200, "New Client Connected", "Clients Currently Connected:" + vbCrLf + listofcclients, ToolTipIcon.Info)
+                NotifyIcon1.ShowBalloonTip(200, "New Client Connected", "Clients Currently Connected:" + listofcclients, ToolTipIcon.Info)
+
             ElseIf vr.Stations.Count < noconn Then
                 Try
                     vbdevaud.Play(Application.StartupPath + "\disconnect.wav")
                 Catch exx As Exception
                 End Try
-
-
                 noconn = vr.Stations.Count
                 ListBox1.Items.Clear()
                 listofcclients = ""
-                For Each keyy In vr.Stations.Keys
-                    ListBox1.Items.Add(vr.Stations.Item(keyy).MacAddress.ToString)
-                    listofcclients += keyy + vbCrLf
+                For Each station In vr.Stations
+                    If IsNothing(devices.Item(station.Key)) Then
+                        devices.Add(station.Key, "Unnamed")
+                        SaveDevices()
+                        ListBox1.Items.Add(station.Key & " - " & devices.Item(station.Key).ToString)
+                        listofcclients += vbCrLf + devices.Item(station.Key).ToString
+                    Else
+                        ListBox1.Items.Add(station.Key & " - " & devices.Item(station.Key).ToString)
+                        listofcclients += vbCrLf + devices.Item(station.Key).ToString
+                    End If
                 Next
-                NotifyIcon1.ShowBalloonTip(200, "Client Disconnected", "Clients Currently Connected:" + vbCrLf + listofcclients, ToolTipIcon.Info)
-
+                NotifyIcon1.ShowBalloonTip(200, "Client Disconnected", "Clients Currently Connected:" + listofcclients, ToolTipIcon.Info)
+            End If
+            If vr.Stations.Count > alertcount Then
+                Try
+                    vbdevaud.Play(Application.StartupPath + "\warn.wav")
+                Catch exx As Exception
+                End Try
             End If
             Label3.Text = "No of Connected Clients:" + vr.Stations.Count.ToString
         Else
@@ -87,14 +115,11 @@ Public Class Form1B
         ElseIf vr.HostedNetworkState = Global.VirtualRouter.Wlan.WinAPI.WLAN_HOSTED_NETWORK_STATE.wlan_hosted_network_unavailable Then
             Hosted(False)
         End If
-
     End Sub
 
     Private Sub Timer2_Tick(sender As System.Object, e As System.EventArgs) Handles Timer2.Tick
         ct += 1
         If ct = 4 Then
-            hico = Me.Icon
-            cico = NotifyIcon1.Icon
             Me.Icon = cico
         End If
         If ct = 9 Then
@@ -107,6 +132,8 @@ Public Class Form1B
                     'Debug.Print(cmd)
                     If cmd.StartsWith("ssid=") Then TextBox1.Text = cmd.Substring(5)
                     If cmd.StartsWith("pass=") Then TextBox2.Text = cmd.Substring(5)
+                    If cmd.StartsWith("warn=") Then alertcount = cmd.Substring(5)
+
                 Next
             End If
             If TextBox1.Text = "" Then vr.QueryConnectionSettings(TextBox1.Text, vbNull)
@@ -185,10 +212,10 @@ Public Class Form1B
 
     End Sub
 
-    
 
 
-   
+
+
 
     Private Sub NotifyIcon1_DoubleClick(sender As Object, e As System.EventArgs) Handles NotifyIcon1.DoubleClick
         If Me.Visible = True Then
@@ -202,16 +229,17 @@ Public Class Form1B
     Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
 
         If Button9.Text = "Clients && ICS..." Then
-            For Me.i = 1 To 48
-                Me.Height += 4
-                Me.Width += 4
+            For Me.i = 1 To 24
+                Me.Height += 8
+                Me.Width += 12
                 Me.Refresh()
             Next
             Button9.Text = "Clients && ICS."
         Else
-            For Me.i = 1 To 192
-                Me.Height -= 1
-                Me.Width -= 1
+            For Me.i = 1 To 24
+                Me.Height -= 8
+                Me.Width -= 12
+                Me.Refresh()
             Next
             Button9.Text = "Clients && ICS..."
         End If
@@ -222,20 +250,28 @@ Public Class Form1B
         NotifyIcon1.Dispose()
     End Sub
 
-
-   
-    Private Sub Form1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
-        Me.Width = 278
-        Me.Height = 146
+    Private Sub Form1B_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        'LoadDevices()
         Try
+            table.ReadXmlSchema("devices.xsd")
+            table.ReadXml("devices.xmlx")
+            For Each row As DataRow In table.Rows
+                devices.Add(row.Item(0), row.Item(1))
+            Next
+
+            cico = NotifyIcon1.Icon
+            hico = Me.Icon
+            Me.Width = 278
+            Me.Height = 146
             Dim IntfaceIndex As Integer = 0
             For Each Intface In ics.Connections
-                ListBox2.Items.Add(Intface.Name)
-                ListBox3.Items.Add(Intface.Name)
+                ListBox2.Items.Add(Intface.Name & " - " & Intface.DeviceName)
+                ListBox3.Items.Add(Intface.Name & " - " & Intface.DeviceName)
                 '  If Intface.IsPublic = True Then
                 '  Debug.Print(">>" + Intface.Name)
                 '   ListBox2.SelectedIndex = IntfaceIndex
                 '   End If
+                Debug.Print(Intface.Name & " >>>> " & Intface.DeviceName)
                 If Intface.IsPrivate = True Then
                     'Debug.Print("<<" + Intface.Name)
                     ListBox3.SelectedIndex = IntfaceIndex
@@ -243,6 +279,7 @@ Public Class Form1B
                 IntfaceIndex += 1
             Next
         Catch ex As Exception
+            Debug.Print(ex.Message.ToString)
             NotifyIcon1.BalloonTipTitle = "Error"
             NotifyIcon1.BalloonTipText = ex.Message.ToString
             NotifyIcon1.ShowBalloonTip(4000)
@@ -258,6 +295,8 @@ Public Class Form1B
         End If
         If Me.WindowState = FormWindowState.Minimized Then
             Me.ShowInTaskbar = False
+            NotifyIcon1.Visible = True
+            NotifyIcon1.ShowBalloonTip(3000)
         End If
     End Sub
 
@@ -271,7 +310,6 @@ Public Class Form1B
             ToolTip1.SetToolTip(Button1, "Stop the HostedNetwork")
             ConMenuState.Text = "Stop"
             ConMenuState.ToolTipText = "Stop the HostedNetwork"
-
             NotifyIcon1.Text = "No of Clients Connected: " + noconn.ToString
             NotifyIcon1.Icon = hico
             Me.Icon = hico
@@ -360,14 +398,75 @@ Public Class Form1B
         ics.DisableIcsOnAll()
     End Sub
 
-   
 
-    
 
+
+
+
+
+
+
+
+
+
+
+    Private Sub ListBox1_DoubleClick(sender As Object, e As System.EventArgs) Handles ListBox1.DoubleClick
+        Dim devname = ""
+        'Debug.Print(ListBox1.SelectedIndex)
+        If ListBox1.SelectedIndex = -1 And ListBox1.Items.Count > 0 Then ListBox1.SelectedIndex = 0
+        If ListBox1.SelectedIndex >= 0 Then
+            devname = InputBox("Name:", "Enter Device Name", Trim(Mid(ListBox1.SelectedItem.ToString, 20)))
+
+        End If
+        If Not devname = "" Then
+            devices.Item(Trim(Mid(ListBox1.SelectedItem.ToString, 1, 17))) = devname
+            SaveDevices()
+            ListBox1.Items.Clear()
+            listofcclients = ""
+            For Each station In vr.Stations
+
+                If IsNothing(devices.Item(station.Key)) Then
+                    devices.Add(station.Key, "Unnamed")
+                    SaveDevices()
+                    ListBox1.Items.Add(station.Key & " - " & devices.Item(station.Key).ToString)
+                    listofcclients += vbCrLf + station.Key
+                Else
+                    ListBox1.Items.Add(station.Key & " - " & devices.Item(station.Key).ToString)
+                    listofcclients += vbCrLf + devices.Item(station.Key).ToString
+                End If
+
+            Next
+
+        End If
+
+    End Sub
+
+
+
+    Public Sub SaveDevices()
+        table.Clear()
+        For Each key In devices.Keys
+
+            table.Rows.Add(key, devices.Item(key))
+        Next
+
+        table.AcceptChanges()
+        table.WriteXml("devices.xmlx")
+    End Sub
+    Public Sub LoadDevices()
+        'Checking if file exists, if no exit method
+        If File.Exists("Devices.dat") = False Then Exit Sub
+        'open file through stream
+        Dim fs As New FileStream("Devices.dat", FileMode.Open)
+        'blabla binary formater
+        Dim bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
+        'desserializing and fill the hashtable with data from it
+        devices = bf.Deserialize(fs)
+        'close stream
+        fs.Close()
+    End Sub
 
 
 
   
-
-   
 End Class

@@ -137,9 +137,9 @@ Partial Class Form1B
         '
         'Button7
         '
-        Me.Button7.Location = New System.Drawing.Point(283, 278)
+        Me.Button7.Location = New System.Drawing.Point(465, 275)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(170, 26)
+        Me.Button7.Size = New System.Drawing.Size(83, 29)
         Me.Button7.TabIndex = 13
         Me.Button7.Text = "About"
         Me.Button7.UseVisualStyleBackColor = True
@@ -241,23 +241,23 @@ Partial Class Form1B
         Me.ListBox2.FormattingEnabled = True
         Me.ListBox2.Location = New System.Drawing.Point(283, 43)
         Me.ListBox2.Name = "ListBox2"
-        Me.ListBox2.Size = New System.Drawing.Size(171, 69)
+        Me.ListBox2.Size = New System.Drawing.Size(265, 95)
         Me.ListBox2.TabIndex = 21
         '
         'ListBox3
         '
         Me.ListBox3.DisplayMember = "Guid"
         Me.ListBox3.FormattingEnabled = True
-        Me.ListBox3.Location = New System.Drawing.Point(283, 144)
+        Me.ListBox3.Location = New System.Drawing.Point(283, 174)
         Me.ListBox3.Name = "ListBox3"
-        Me.ListBox3.Size = New System.Drawing.Size(171, 69)
+        Me.ListBox3.Size = New System.Drawing.Size(265, 95)
         Me.ListBox3.TabIndex = 22
         Me.ListBox3.ValueMember = "Guid"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(280, 128)
+        Me.Label7.Location = New System.Drawing.Point(280, 158)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(23, 13)
         Me.Label7.TabIndex = 23
@@ -265,18 +265,18 @@ Partial Class Form1B
         '
         'Button8
         '
-        Me.Button8.Location = New System.Drawing.Point(283, 226)
+        Me.Button8.Location = New System.Drawing.Point(283, 275)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(79, 46)
+        Me.Button8.Size = New System.Drawing.Size(83, 29)
         Me.Button8.TabIndex = 24
         Me.Button8.Text = "Share"
         Me.Button8.UseVisualStyleBackColor = True
         '
         'Button10
         '
-        Me.Button10.Location = New System.Drawing.Point(368, 226)
+        Me.Button10.Location = New System.Drawing.Point(372, 275)
         Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(85, 46)
+        Me.Button10.Size = New System.Drawing.Size(87, 29)
         Me.Button10.TabIndex = 25
         Me.Button10.Text = "Disable ICS"
         Me.Button10.UseVisualStyleBackColor = True
@@ -285,7 +285,7 @@ Partial Class Form1B
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(270, 120)
+        Me.ClientSize = New System.Drawing.Size(560, 312)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Label7)
@@ -311,7 +311,6 @@ Partial Class Form1B
         Me.Name = "Form1B"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "Tiny Wifi Host"
-        Me.TopMost = True
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
