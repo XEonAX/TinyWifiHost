@@ -34,8 +34,8 @@ Partial Class Form1B
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ConMenuState = New System.Windows.Forms.ToolStripMenuItem()
@@ -126,15 +126,6 @@ Partial Class Form1B
         Me.ToolTip1.SetToolTip(Me.Button9, "List of Connected Clients")
         Me.Button9.UseVisualStyleBackColor = True
         '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(8, 86)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(65, 27)
-        Me.Button6.TabIndex = 12
-        Me.Button6.Text = "Exit"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
         'Button7
         '
         Me.Button7.Location = New System.Drawing.Point(465, 275)
@@ -144,6 +135,15 @@ Partial Class Form1B
         Me.Button7.Text = "About"
         Me.ToolTip1.SetToolTip(Me.Button7, "Opens project homepage on codeplex.")
         Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(8, 86)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(65, 27)
+        Me.Button6.TabIndex = 12
+        Me.Button6.Text = "Exit"
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'NotifyIcon1
         '
@@ -286,7 +286,7 @@ Partial Class Form1B
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(560, 312)
+        Me.ClientSize = New System.Drawing.Size(270, 120)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Label7)
