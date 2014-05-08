@@ -49,7 +49,8 @@ Public Class Form1B
             End If
         Catch ex As Exception
             NotifyIcon1.BalloonTipTitle = "Error"
-            NotifyIcon1.BalloonTipText = ex.Message.ToString & vbCrLf & "Try running this command in an elevated command prompt." & vbCrLf & "'netsh wlan set hostednetwork mode=allow'"
+            Debug.Print("1341")
+            NotifyIcon1.BalloonTipText = ex.Message.ToString & " " & vbCrLf & "Try running this command in an elevated command prompt." & vbCrLf & "'netsh wlan set hostednetwork mode=allow'"
             NotifyIcon1.ShowBalloonTip(5000)
         End Try
     End Sub
@@ -77,7 +78,7 @@ Public Class Form1B
                         listofcclients += vbCrLf + devices.Item(station.Key).ToString
                     End If
                 Next
-                NotifyIcon1.ShowBalloonTip(200, "New Client Connected", "Clients Currently Connected:" + Trim(listofcclients), ToolTipIcon.Info)
+                NotifyIcon1.ShowBalloonTip(200, "New Client Connected", "Clients Currently Connected:" + Trim(listofcclients & " "), ToolTipIcon.Info)
 
             ElseIf vr.Stations.Count < noconn Then
                 Try
@@ -98,7 +99,7 @@ Public Class Form1B
                         listofcclients += vbCrLf + devices.Item(station.Key).ToString
                     End If
                 Next
-                NotifyIcon1.ShowBalloonTip(200, "Client Disconnected", "Clients Currently Connected:" + Trim(listofcclients), ToolTipIcon.Info)
+                NotifyIcon1.ShowBalloonTip(200, "Client Disconnected", "Clients Currently Connected:" + Trim(listofcclients & " "), ToolTipIcon.Info)
             End If
             If vr.Stations.Count > alertcount Then
                 Try
@@ -198,7 +199,8 @@ Public Class Form1B
             Process.Start("http://wifihnc.codeplex.com/")
         Catch ex As Exception
             NotifyIcon1.BalloonTipTitle = "Error"
-            NotifyIcon1.BalloonTipText = ex.Message.ToString
+            Debug.Print("12sdfdf1")
+            NotifyIcon1.BalloonTipText = ex.Message.ToString & " "
             NotifyIcon1.ShowBalloonTip(5000)
         End Try
         ' MsgBox("This Application is created by Sumant Vanage." + vbCrLf + "Special Thanks to Chris Pietschmann" + vbCrLf + "And Microsoft.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AbouT")
@@ -288,7 +290,8 @@ Public Class Form1B
         Catch ex As Exception
             Debug.Print(ex.Message.ToString)
             NotifyIcon1.BalloonTipTitle = "Error"
-            NotifyIcon1.BalloonTipText = ex.Message.ToString & vbCrLf & "Try running this program as administrator."
+            Debug.Print("12erheh1")
+            NotifyIcon1.BalloonTipText = ex.Message.ToString & " " & vbCrLf & "Try running this program as administrator."
             NotifyIcon1.ShowBalloonTip(5000)
         End Try
 
@@ -303,7 +306,7 @@ Public Class Form1B
         If Me.WindowState = FormWindowState.Minimized Then
             Me.ShowInTaskbar = False
             NotifyIcon1.Visible = True
-            NotifyIcon1.ShowBalloonTip(3000)
+
         End If
     End Sub
 
@@ -391,7 +394,8 @@ Public Class Form1B
 
             Catch ex As Exception
                 NotifyIcon1.BalloonTipTitle = "Error"
-                NotifyIcon1.BalloonTipText = ex.Message.ToString
+                Debug.Print("121")
+                NotifyIcon1.BalloonTipText = ex.Message.ToString & " "
                 NotifyIcon1.ShowBalloonTip(5000)
             End Try
         Else
